@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     public bool isGoal; // ゴールフラグ
 
-
+    
     // Start is called before the first frame update
     void Start()
     {

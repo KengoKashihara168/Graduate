@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
         {
             instance = FindObjectOfType<PlayerController>();
 
-            if(instance == null)
+            if (instance == null)
             {
                 GameObject obj = new GameObject("PlayerController");
                 instance = obj.AddComponent<PlayerController>();
@@ -60,9 +60,9 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     /// <param name="num">プレイヤー番号</param>
     /// <returns>村人フラグ</returns>
-    public bool IsHuman(PlayerNum num)
+    public bool IsHuman(int num)
     {
-        return players[(int)num].isHuman;
+        return players[num].isHuman;
     }
 
     /// <summary>
@@ -129,5 +129,10 @@ public class PlayerController : MonoBehaviour
     public void Goal(int num)
     {
         players[num].isGoal = true;
+    }
+
+    public void ResetPlayer()
+    {
+        PlayerInitialize();
     }
 }

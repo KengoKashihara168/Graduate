@@ -38,6 +38,7 @@ public class CountDown : MonoBehaviour
         if(time <= 0.0f)
         {
             EndCount();
+            SceneManager.LoadScene("MoveScene");
         }
     }
 
@@ -48,6 +49,7 @@ public class CountDown : MonoBehaviour
     {
         frameTime = 0.0f;
         Debug.Log("終了");
+        SceneManager.LoadScene("MoveScene");
     }
 
     /// <summary>
