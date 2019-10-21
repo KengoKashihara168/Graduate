@@ -412,7 +412,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1109.01, y: 412.9}
+  m_SizeDelta: {x: 1832.7, y: 417.52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884387466
 MonoBehaviour:
@@ -445,7 +445,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30BF\u30A4\u30C8\u30EB"
+  m_Text: Phantom Wolf
 --- !u!222 &1884387467
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -80,7 +80,6 @@ public class PlayerState : MonoBehaviour
             //画面にプレイヤーと今の状態を表示する
             player[i].GetComponent<Text>().text = "Player" + (i + 1).ToString() + " " + nowState[i].ToString();
 
-          
 
         }
     }
