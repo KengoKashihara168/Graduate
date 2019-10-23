@@ -5,8 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class SelectJobChangeCharacter : MonoBehaviour
 {
-    //プレイヤーコントローラー
-    PlayerController script;
+
+
     //リストに数値を入れる。
     List<int> numbers = new List<int>();
    
@@ -58,6 +58,10 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
     //プレイヤー変更用ボタン
     [SerializeField]
+    private GameObject MoveSceneButton = null;
+
+    //プレイヤー変更用ボタン
+    [SerializeField]
     private GameObject PlayerPosDecisionButton;
 
     //人間の画像
@@ -84,8 +88,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
     static int x, y;
     //postion確保用配列
-    int[] posx;
-    int[] posy;
+
     //リストに数値を入れる。
     List<int> posListX = new List<int>();
     //リストに数値を入れる。
@@ -95,12 +98,15 @@ public class SelectJobChangeCharacter : MonoBehaviour
     static int MAX_SIZE_X = 5;
     static int MAX_SIZE_Y = 5;
 
+    bool IsMoveScene;
+    string name;
 
-// Start is called before the first frame update
 
-//--------------------------------------------------
-//初期化用
-//--------------------------------------------------
+    // Start is called before the first frame update
+
+    //--------------------------------------------------
+    //初期化用
+    //--------------------------------------------------
 
     void Start()
     {
@@ -109,6 +115,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
         //Playerのジョブボタンの表示化
         PlayerChangeButton.SetActive(true);
+        MoveSceneButton.SetActive(false);
 
         //Listの中にImageを挿入する。
         playerImageList[0] = playerImage1;
@@ -175,21 +182,38 @@ public class SelectJobChangeCharacter : MonoBehaviour
         { 
             PushPositionButton();
         }
+
         //全員の場所が決まったら
         if (pushcount >= MAXPLAYER && posCount>=MAXPLAYER && !IsGoalDecision)
         {
-            //4回押されたら配置用ボタンの表示に変更
-            PlayerChangeButton.GetComponentInChildren<Text>().text = "次へ";
 
-            //マップの選択画面に行く
-            jobDecision = true;
+            //四人目とゴールをけっていする。
 
+
+
+
+            //jobDecision = true;
             //ゴールを決める
             SetitngGoal();
-            //  SceneManager.LoadScene("CountDown");
+
+
+            Debug.Log("aaaxxx");
         }
 
 
+        if(IsGoalDecision)
+        {
+            DistancePlayerToGoal();
+            PlayerChangeButton.GetComponentInChildren<Text>().text = "ゴールから一番近いのは";
+        }
+
+
+        if (pushcount>=MAXPLAYER+1)
+        {
+            //ここでボタンをだす。
+            MoveSceneButton.SetActive(true);
+           
+        }
     }
 
     //----------------------------------------------------------------
@@ -238,6 +262,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
         {
             //狼用
             print("おおかみだからありましぇーん");
+            HumanPosition();
             PlayerController.Instance.SetPosition(pushcount - 1,-1,-1);
             //何もなし！！！！！
 
@@ -250,17 +275,26 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
     }
 
+    //Scene変更用を押されたときよう処理
+    void PushMoveSceneButton()
+    {
+        //Scene遷移
+        SceneManager.LoadScene("CountDown");
 
-//--------------------------------------------------------------
-//ボタン押されたあと
-//--------------------------------------------------------------
+    }
+
+
+    //--------------------------------------------------------------
+    //ボタン押されたあと
+    //--------------------------------------------------------------
 
     //Characterボタンを押された時の関数
     public void OnClickCharacterButton()
     {
         if (IsGoalDecision)
         {
-            SceneManager.LoadScene("CountDown");
+            a.text = name;
+            MoveSceneButton.SetActive(true);
         }
         else
         {
@@ -278,53 +312,73 @@ public class SelectJobChangeCharacter : MonoBehaviour
     //ジョブボタンを押された時の関数
     public void OnClickJobButton()
     {
-        //ジョブ表示をひらいた場合
-        //プレイヤーの画像を表示しない
-        // ループして、オブジェクト名をログに出力
-        foreach (GameObject i in playerImageList)
+        if (!jobDecision)
         {
-            i.SetActive(false);
+
+            //ジョブ表示をひらいた場合
+            //プレイヤーの画像を表示しない
+            // ループして、オブジェクト名をログに出力
+            foreach (GameObject i in playerImageList)
+            {
+                i.SetActive(false);
+            }
+            //Job表示用Flagをtrueにする。
+            IsJobButtonTouch = true;
+            //ジョブボタンの非表示
+            PlayerJobButton.SetActive(false);
+            //キャラ変更ボタンの表示
+            PlayerChangeButton.SetActive(false);
+            //Characterの場所決定ボタン
+            PlayerPosDecisionButton.SetActive(true);
         }
-        //Job表示用Flagをtrueにする。
-        IsJobButtonTouch = true;
-        //ジョブボタンの非表示
-        PlayerJobButton.SetActive(false);
-        //キャラ変更ボタンの表示
-        PlayerChangeButton.SetActive(false);
-        //Characterの場所決定ボタン
-        PlayerPosDecisionButton.SetActive(true);
+
 
     }
 
- //Position決定用ボタンを押されたときの関数
+    //Position決定用ボタンを押されたときの関数
     public void OnClickPositionButton()
     {      
-        
-        //Character表示をひらいた場合
-        //プレイヤーの役職の画像を表示しない
-        // ループして、オブジェクト名をログに出力
-        foreach (GameObject i in playerJobImageList)
+        if(!jobDecision)
         {
-            i.SetActive(false);
+            //Character表示をひらいた場合
+            //プレイヤーの役職の画像を表示しない
+            // ループして、オブジェクト名をログに出力
+            foreach (GameObject i in playerJobImageList)
+            {
+                i.SetActive(false);
+            }
+
+
+            //Position表示用Flagをtrueにする。
+            IsPostionButtomTouch = true;
+
+            //ジョブボタンの表示
+            PlayerJobButton.SetActive(false);
+            //キャラ変更ボタンの非表示
+            PlayerChangeButton.SetActive(true);
+            //Characterの場所決定ボタン
+            PlayerPosDecisionButton.SetActive(false);
+
         }
 
-
-        //Position表示用Flagをtrueにする。
-        IsPostionButtomTouch = true;
-
+    }
+    //Scene移動ボタンを押されたときの関数
+    public void OnClickPushMoveScene()
+    {
+        IsMoveScene = true;
         //ジョブボタンの表示
         PlayerJobButton.SetActive(false);
         //キャラ変更ボタンの非表示
-        PlayerChangeButton.SetActive(true);
+        PlayerChangeButton.SetActive(false);
         //Characterの場所決定ボタン
         PlayerPosDecisionButton.SetActive(false);
-
+        PushMoveSceneButton();
     }
 
 
-//--------------------------------------------------------------
-//Stage関連
-//--------------------------------------------------------------
+    //--------------------------------------------------------------
+    //Stage関連
+    //--------------------------------------------------------------
 
     //人間の場所
     void HumanPosition()
@@ -338,7 +392,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
             {
                 x1 = Random.Range(0, MAX_SIZE_X);
                 y1 = Random.Range(0, MAX_SIZE_Y);
-
+                i = 0;
                 continue;
             }
 
@@ -347,10 +401,13 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
         posListX.Add(x1);
         posListY.Add(y1);
+
+
+
         //プレイヤーに情報代入
         PlayerController.Instance.SetPosition(pushcount - 1, posListX[posListX.Count - 1], posListY[posListY.Count - 1]);
         a.text = "プレイヤーの初期位置は" +((x1 + (y1 * 5)) + 1);
-        print("Player"+( pushcount - 1)+ "の場所はxは" + PlayerController.Instance.GetPlayerPositionX(pushcount - 1) + "でyは" + PlayerController.Instance.GetPlayerPositionY(pushcount - 1));
+        print("Player"+( pushcount)+ "の場所は" + ((x1 + (y1 * 5)) + 1));
 
     }
 
@@ -366,6 +423,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
             {
                 x1 = Random.Range(0, MAX_SIZE_X);
                 y1 = Random.Range(0, MAX_SIZE_Y);
+                i = 0;
                 continue;
             }
         }
@@ -374,7 +432,6 @@ public class SelectJobChangeCharacter : MonoBehaviour
         IsGoalDecision = true;
         x = x1;
         y = y1;
-        
         print("Goalの場所は"+((x1 + (y1 * 5)) + 1));
     }
 
@@ -446,6 +503,47 @@ public class SelectJobChangeCharacter : MonoBehaviour
         }
     }
 
+
+    void DistancePlayerToGoal()
+    {
+            //GoalとPlayerの場所の比較
+            int pos1 = 5, pos2 = 5;
+            int fPos1 = 0, fPos2 = 0;
+            Vector2 posA = new Vector2(pos1, pos2);
+            Vector2 posB = new Vector2(fPos1, fPos2);
+
+            float distance = (posA - posB).magnitude;
+
+            pos1 = x;
+            pos2 = y;
+            //差の算出
+            for (int i = 0; i < 4; i++)
+            {
+
+                fPos1 = PlayerController.Instance.GetPlayerPositionX(i);
+                print("elsefPos1" + fPos1);
+
+                fPos2 = PlayerController.Instance.GetPlayerPositionY(i);
+                print("fPos2" + fPos2);
+
+                posA = new Vector2(pos1, pos2);
+                posB = new Vector2(fPos1, fPos2);
+
+                //distance = (posA - posB).magnitude;
+
+                if (distance >= (posA - posB).magnitude)
+                {
+                    distance = (posA - posB).magnitude;
+                    name = "プレイヤー" + (i + 1);
+
+                }
+
+            }
+            //比較後それを出す
+
+            //a.text = name;
+            print(name);
+    }
 //-----------------------
 //役職別
 //人間用
