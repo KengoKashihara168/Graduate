@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Determine : MonoBehaviour
 {
-    int Wolf;   //   人狼が誰かを保存しておく変数
+    [SerializeField]
+    static int Wolf;   //   人狼が誰かを保存しておく変数
     bool hereWolfFlag;
     GameObject map; // マップ用のオブジェクト
-   // Start is called before the first frame update
+                    // Start is called before the first frame update
     void Start()
     {
         hereWolfFlag = false;
@@ -19,13 +20,13 @@ public class Determine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     // 死亡確認関数
     public void DetermineDie()
     {
         // 人狼が誰か確認する
-        if(!hereWolfFlag)
+        if (!hereWolfFlag)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -38,7 +39,7 @@ public class Determine : MonoBehaviour
                 }
             }
         }
-      
+
         // 誰が噛まれているかの確認する
         for (int i = 0; i < 4; i++)
         {
@@ -89,12 +90,45 @@ public class Determine : MonoBehaviour
         }
     }
     // マップの位置がかぶっているかの確認関数
-    public bool MatchCheck(int x1,int y1,int x2,int y2)
+    public bool MatchCheck(int x1, int y1, int x2, int y2)
     {
-        if(x1==x2&&y1==y2)
+        if (x1 == x2 && y1 == y2)
         {
             return true;
         }
         return false;
     }
+
+
+    //人狼と村人が近いか確認する関数
+    static public bool WolfCheck()
+    {
+        //判定用
+        int x;
+        int y;
+  
+        for (int i = 0; i < 4; i++)
+        {
+       
+            //狼とゴールもしくは死んだプレイヤーならスキップ
+            if(Wolf==i || PlayerController.Instance.IsGoal(i) || !PlayerController.Instance.IsLive(i))
+            {
+                continue;
+            }
+            //人狼と村人の位置の差
+            x = PlayerController.Instance.GetPlayerPositionX(i) - PlayerController.Instance.GetPlayerPositionX(Wolf);
+            y = PlayerController.Instance.GetPlayerPositionY(i) - PlayerController.Instance.GetPlayerPositionY(Wolf);
+           
+            //マップの差分が１以下ならtrueを返す
+            if (x <= 1 && x >= -1 && y <= 1 && y >= -1)
+            {
+                Debug.Log("プレイヤー"+i);
+                return true;
+            }
+            
+        }
+
+        return false;
+    }
+
 }
