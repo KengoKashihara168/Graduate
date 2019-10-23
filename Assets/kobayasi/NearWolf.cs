@@ -17,6 +17,11 @@ public class NearWolf : MonoBehaviour
         {
             //その情報を表示する
             nearWolf.text = "プレイヤーの近くに人狼がいます";
+            nearWolf.enabled = true;
+        }
+        else
+        {
+            nearWolf.enabled=false;
         }
     }
 

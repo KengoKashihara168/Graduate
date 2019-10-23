@@ -29,12 +29,13 @@ public class ResultText : MonoBehaviour
                }
             }
         }
+        survival.text = "生き残りは" + count;
     }
     // Update is called once per frame
     void Update()
     {
         
-        survival.text = "生き残りは" + count;
+        
 
     }
 }

@@ -4,5 +4,23 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/oono/Title.unity
+    guid: ae48e8f1268d6b943802926a9c7f9fa4
+  - enabled: 1
+    path: Assets/teramoto/Scenes/Job.unity
+    guid: 62c0c7df84ad1154dae07880aa70e72d
+  - enabled: 1
+    path: Assets/kassihara/Scenes/CountDown.unity
+    guid: f51dc1800e44fc34b8a63a7842229718
+  - enabled: 1
+    path: Assets/yamaguti/Scenes/MoveScene.unity
+    guid: dbdf1fd31c72b4847a6b0fb44db40d75
+  - enabled: 1
+    path: Assets/kobayasi/Judgment.unity
+    guid: 6c85e00d920939040a769ac59f65cc38
+  - enabled: 1
+    path: Assets/oono/Result.unity
+    guid: fafb740a1da719e4aac5fb0a9f273df6
   m_configObjects: {}
