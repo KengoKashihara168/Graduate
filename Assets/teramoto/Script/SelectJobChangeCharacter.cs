@@ -263,7 +263,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
             //狼用
             print("おおかみだからありましぇーん");
             HumanPosition();
-            PlayerController.Instance.SetPosition(pushcount - 1,-1,-1);
+          
             //何もなし！！！！！
 
         }
