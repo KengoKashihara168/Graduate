@@ -95,8 +95,8 @@ public class SelectJobChangeCharacter : MonoBehaviour
     List<int> posListY = new List<int>();
 
 
-    static int MAX_SIZE_X = 5;
-    static int MAX_SIZE_Y = 5;
+    static int MAX_SIZE_X = 4;
+    static int MAX_SIZE_Y = 4;
 
     bool IsMoveScene;
     string name;
@@ -215,6 +215,31 @@ public class SelectJobChangeCharacter : MonoBehaviour
            
         }
     }
+
+    //Goalの場所
+    void SetitngGoal()
+    {
+        int x1 = Random.Range(0, MAX_SIZE_X);
+        int y1 = Random.Range(0, MAX_SIZE_Y);
+
+        for (int i = 0; i < posListX.Count; i++)
+        {
+            if (x1 == posListX[i] && y1 == posListY[i])
+            {
+                x1 = Random.Range(0, MAX_SIZE_X);
+                y1 = Random.Range(0, MAX_SIZE_Y);
+                i = 0;
+                continue;
+            }
+        }
+
+
+        IsGoalDecision = true;
+        x = x1;
+        y = y1;
+        print("Goalの場所は" + ((x1 + (y1 * 4)) + 1));
+    }
+
 
     //----------------------------------------------------------------
     //ボタン用
@@ -406,34 +431,11 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
         //プレイヤーに情報代入
         PlayerController.Instance.SetPosition(pushcount - 1, posListX[posListX.Count - 1], posListY[posListY.Count - 1]);
-        a.text = "プレイヤーの初期位置は" +((x1 + (y1 * 5)) + 1);
-        print("Player"+( pushcount)+ "の場所は" + ((x1 + (y1 * 5)) + 1));
+        a.text = "プレイヤーの初期位置は" +((x1 + (y1 * 4)) + 1);
+        print("Player"+( pushcount)+ "の場所は" + ((x1 + (y1 * 4)) + 1));
 
     }
 
-    //Goalの場所
-    void SetitngGoal()
-    {
-      int x1 = Random.Range(0, MAX_SIZE_X);
-      int y1 = Random.Range(0, MAX_SIZE_Y);
-
-        for (int i = 0; i < posListX.Count; i++)
-        {
-            if (x1 == posListX[i] && y1 == posListY[i])
-            {
-                x1 = Random.Range(0, MAX_SIZE_X);
-                y1 = Random.Range(0, MAX_SIZE_Y);
-                i = 0;
-                continue;
-            }
-        }
-
-
-        IsGoalDecision = true;
-        x = x1;
-        y = y1;
-        print("Goalの場所は"+((x1 + (y1 * 5)) + 1));
-    }
 
 //--------------------------------------------------------------
 //Getter関数
