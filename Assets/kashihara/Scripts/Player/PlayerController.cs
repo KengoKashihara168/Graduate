@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private static PlayerController instance;
-    public static Player[] players; // プレイヤーたち
+    private  static Player[]         players; // プレイヤーたち
+    private  static int              TurnCount{ get; set; }
 
     /// <summary>
     /// インスタンス
@@ -134,5 +135,15 @@ public class PlayerController : MonoBehaviour
     public void ResetPlayer()
     {
         PlayerInitialize();
+    }
+
+    public int GetCurrentTurn()
+    {
+        return TurnCount;
+    }
+
+    public void IncrimentTurn()
+    {
+        TurnCount++;
     }
 }
