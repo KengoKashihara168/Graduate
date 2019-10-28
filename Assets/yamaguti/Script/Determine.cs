@@ -118,9 +118,9 @@ public class Determine : MonoBehaviour
             //人狼と村人の位置の差
             x = PlayerController.Instance.GetPlayerPositionX(i) - PlayerController.Instance.GetPlayerPositionX(Wolf);
             y = PlayerController.Instance.GetPlayerPositionY(i) - PlayerController.Instance.GetPlayerPositionY(Wolf);
-           
-            //マップの差分が１以下ならtrueを返す
-            if (x <= 1 && x >= -1 && y <= 1 && y >= -1)
+
+            //マップの差分が１ならtrueを返す
+            if ((x <= 1 && x >= -1 && y == 0) || (y <= 1 && y >= -1 && x == 0))
             {
                 Debug.Log("プレイヤー"+i);
                 return true;
