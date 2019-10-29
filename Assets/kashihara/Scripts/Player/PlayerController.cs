@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
                 GameObject obj = new GameObject("PlayerController");
                 instance = obj.AddComponent<PlayerController>();
                 DontDestroyOnLoad(instance);
-                PlayerInitialize();
+                InitializePlayer();
             }
             return instance;
         }
@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         set { }
     }
 
-    private static void PlayerInitialize()
+    private static void InitializePlayer()
     {
         players = new Player[(int)PlayerNum.MaxPlayer];
         GameObject obj = new GameObject("Player");
@@ -132,18 +132,39 @@ public class PlayerController : MonoBehaviour
         players[num].isGoal = true;
     }
 
-    public void ResetPlayer()
+    /// <summary>
+    /// リセット
+    /// </summary>
+    public void Restart()
     {
-        PlayerInitialize();
+        // プレイヤーの初期化
+        InitializePlayer();
+        // ターン数の初期化
+        InitializeTurn();
     }
 
+    /// <summary>
+    /// 現在のターン数を取得
+    /// </summary>
+    /// <returns></returns>
     public int GetCurrentTurn()
     {
         return TurnCount;
     }
 
+    /// <summary>
+    /// ターン数の増加
+    /// </summary>
     public void IncrimentTurn()
     {
         TurnCount++;
+    }
+
+    /// <summary>
+    /// ターン数の初期化
+    /// </summary>
+    private void InitializeTurn()
+    {
+        TurnCount = 0;
     }
 }
