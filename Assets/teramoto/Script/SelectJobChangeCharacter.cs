@@ -240,6 +240,43 @@ public class SelectJobChangeCharacter : MonoBehaviour
         print("Goalの場所は" + ((x1 + (y1 * 4)) + 1));
     }
 
+    //----------------------------------------------------------------
+    //キー用
+    //----------------------------------------------------------------
+    void SetingKey()
+    {
+
+        int x1 = Random.Range(0, MAX_SIZE_X);
+        int y1 = Random.Range(0, MAX_SIZE_Y);
+        int num = Random.Range(0, 4);
+        int save = -1;
+        for (int j = 0; j < 2; j++)
+        {
+            for (int i = 0; i < posListX.Count; i++)
+            {
+                if (x1 == posListX[i] && y1 == posListY[i])
+                {
+                    if (x1 == x && y1 == y)
+                    {
+
+                        x1 = Random.Range(0, MAX_SIZE_X);
+                        y1 = Random.Range(0, MAX_SIZE_Y);
+                        i = 0;
+                        continue;
+                    }
+                }
+            }
+            if (save == num)
+            {
+                num = Random.Range(0, 4);
+                continue;
+            }
+            GoalController.Instance.SetKeyFlag(num, true);
+            GoalController.Instance.SetPos(num, x1, y1);
+            save = num;
+        }
+    }
+
 
     //----------------------------------------------------------------
     //ボタン用
@@ -523,10 +560,10 @@ public class SelectJobChangeCharacter : MonoBehaviour
             {
 
                 fPos1 = PlayerController.Instance.GetPlayerPositionX(i);
-                print("elsefPos1" + fPos1);
+                //print("elsefPos1" + fPos1);
 
                 fPos2 = PlayerController.Instance.GetPlayerPositionY(i);
-                print("fPos2" + fPos2);
+                //print("fPos2" + fPos2);
 
                 posA = new Vector2(pos1, pos2);
                 posB = new Vector2(fPos1, fPos2);

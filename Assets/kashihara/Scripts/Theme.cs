@@ -44,7 +44,10 @@ public class Theme : MonoBehaviour
     private string ChoiseRandom()
     {
         int textNum = Random.Range(0, texts.Count);
-
+        if(PlayerController.Instance.GetCurrentTurn()==1)
+        {
+            textNum = Random.Range(0,2);
+        }
         return texts[textNum];
     }
 }
