@@ -57,6 +57,7 @@ public class CountDown : MonoBehaviour
     /// </summary>
     public void AddTime()
     {
+        if (time >= 540.0f) return; 
         time += 60.0f;
     }
 }

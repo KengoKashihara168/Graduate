@@ -18,7 +18,7 @@ public class Result : MonoBehaviour
     }
    public void OnClik()
     {
-        PlayerController.Instance.ResetPlayer();
+        PlayerController.Instance.Restart();
         SceneManager.LoadScene("Title");
     }
 }

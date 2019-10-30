@@ -12,6 +12,6 @@ public class Turn : MonoBehaviour
     {
         turnText = GetComponent<Text>();
         PlayerController.Instance.IncrimentTurn();
-        turnText.text = PlayerController.Instance.GetCurrentTurn().ToString();
+        turnText.text = PlayerController.Instance.GetCurrentTurn().ToString() + "ターン";
     }
 }
