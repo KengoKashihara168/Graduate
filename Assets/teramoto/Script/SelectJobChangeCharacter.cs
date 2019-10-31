@@ -228,15 +228,17 @@ public class SelectJobChangeCharacter : MonoBehaviour
             {
                 x1 = Random.Range(0, MAX_SIZE_X);
                 y1 = Random.Range(0, MAX_SIZE_Y);
-                i = 0;
+                i = -1;
                 continue;
             }
         }
 
-
         IsGoalDecision = true;
         x = x1;
         y = y1;
+        posListX.Add(x1);
+        posListY.Add(y1);
+        GoalController.Instance.SetPos((int)GoalId.GOAL, x, y);
         print("Goalの場所は" + ((x1 + (y1 * 4)) + 1));
     }
 
@@ -256,24 +258,28 @@ public class SelectJobChangeCharacter : MonoBehaviour
             {
                 if (x1 == posListX[i] && y1 == posListY[i])
                 {
-                    if (x1 == x && y1 == y)
-                    {
 
-                        x1 = Random.Range(0, MAX_SIZE_X);
-                        y1 = Random.Range(0, MAX_SIZE_Y);
-                        i = 0;
-                        continue;
-                    }
+
+                    x1 = Random.Range(0, MAX_SIZE_X);
+                    y1 = Random.Range(0, MAX_SIZE_Y);
+                    i = -1;
+                    continue;
+                    
                 }
             }
+
             if (save == num)
             {
                 num = Random.Range(0, 4);
+                j -= 1;
                 continue;
             }
             GoalController.Instance.SetKeyFlag(num, true);
             GoalController.Instance.SetPos(num, x1, y1);
+            posListX.Add(x1);
+            posListY.Add(y1);
             save = num;
+            print("Key" + num + "の場所は" + "Xが" + GoalController.Instance.GetPosX(num) + "Yが" + GoalController.Instance.GetPosY(num));
         }
     }
 
@@ -454,7 +460,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
             {
                 x1 = Random.Range(0, MAX_SIZE_X);
                 y1 = Random.Range(0, MAX_SIZE_Y);
-                i = 0;
+                i = -1;
                 continue;
             }
 
@@ -581,7 +587,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
             //比較後それを出す
 
             //a.text = name;
-            print(name);
+           // print(name);
     }
 //-----------------------
 //役職別
