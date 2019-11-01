@@ -51,11 +51,11 @@ public class MapPlayerAction : MonoBehaviour
                 // 位置の色を変える
                 var colors = button.GetComponent<Button>().colors;
 
-                colors.normalColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.highlightedColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.pressedColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.selectedColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.disabledColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+                colors.normalColor = Color.cyan;
+                colors.highlightedColor = Color.cyan;
+                colors.pressedColor = Color.cyan;
+                colors.selectedColor = Color.cyan;
+                colors.disabledColor = Color.cyan;
 
                 button.GetComponent<Button>().colors = colors;
                 oldObject = button;
@@ -67,14 +67,6 @@ public class MapPlayerAction : MonoBehaviour
             else if(infX == x && infY == y)
             {
                 // 今いる場所
-                var colors = button.GetComponent<Button>().colors;
-                colors.normalColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-                colors.highlightedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-                colors.pressedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-                colors.selectedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-                colors.disabledColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-
-                button.GetComponent<Button>().colors = colors;
                 Debug.Log("今いるよ");
                 return;
             }
@@ -106,12 +98,11 @@ public class MapPlayerAction : MonoBehaviour
                 // 位置の色を変える
                 var colors = button.GetComponent<Button>().colors;
 
-                colors.normalColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.highlightedColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.pressedColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.selectedColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-                colors.disabledColor = new Color(100f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-
+                colors.normalColor = Color.cyan;
+                colors.highlightedColor = Color.cyan;
+                colors.pressedColor = Color.cyan;
+                colors.selectedColor = Color.cyan;
+                colors.disabledColor = Color.cyan;
 
                 button.GetComponent<Button>().colors = colors;
                 oldObject = button;
@@ -131,13 +122,13 @@ public class MapPlayerAction : MonoBehaviour
     // 色を変えたプレイヤーの初期位置の色を戻す
     public void ResetColor(Button button)
     {
-     
-            var colors = button.colors;
 
-            colors.normalColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.highlightedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.pressedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.disabledColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+        var colors = button.colors;
+
+        colors.normalColor = Color.white;
+        colors.highlightedColor = Color.white;
+        colors.pressedColor = Color.white;
+        colors.disabledColor = Color.white;
 
         button.colors = colors;
 
@@ -176,4 +167,5 @@ public class MapPlayerAction : MonoBehaviour
     {
         mapOnFlag = flag;
     }
+
 }

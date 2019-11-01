@@ -9,23 +9,32 @@ public class MoveScene : MonoBehaviour
     int playerTotal; // 今のプレイヤーの番号を置いておく変数
     public Text pName;  // プレイヤー名を表示するためのテキスト変数
     public Text text;   // 役職を表示するためのテキスト変数
+    public Text securityText;   // ゴールのセキュリティためのテキスト変数
     bool textFlag;      // テキストの表示を変えるフラグ
     bool buttonFlag;    // マップ上のボタンがすでに押されているかのフラグ
     bool moveFlag;      // 移動が完了しているかのフラグ
+    bool goalSecurity = false;
     // Use this for initialization
     void Start()
     {
-       
+        securityText.enabled = false;
+        if (GoalController.Instance.GetGoalFlag())
+        {
+            Debug.Log("セキュリティの作動");
+            GoalController.Instance.SetGoalFlag(false);
+            goalSecurity = true;
+            securityText.text="鍵を開けるのを失敗しましたゴールは"+ ((GoalController.Instance.GetPosX((int)GoalId.GOAL) + (GoalController.Instance.GetPosY((int)GoalId.GOAL) * 4)) + 1)+"です";
+        }
+        GameObject.Find("KeyPanel").SetActive(false);
         playerTotal = 0;
-        while(!PlayerController.Instance.IsLive(playerTotal)|| PlayerController.Instance.IsGoal(playerTotal))
+        while (!PlayerController.Instance.IsLive(playerTotal) || PlayerController.Instance.IsGoal(playerTotal))
         {
             playerTotal++;
-            if(playerTotal>=4)
+            if (playerTotal >= 4)
             {
                 EndPlayer();
             }
         }
-       
         textFlag = false;
         buttonFlag = false;
         moveFlag = false;
@@ -105,6 +114,11 @@ public class MoveScene : MonoBehaviour
     {
         playerTotal = 0;
     }
+    // 今のプレイヤー番号のゲッター
+    public int GetTotal()
+    {
+        return playerTotal;
+    }
     // 移動終了後に呼ぶ出す関数
     public void EndPlayer()
     {
@@ -117,7 +131,6 @@ public class MoveScene : MonoBehaviour
             ResetTotal();
             // 移動シーン終了
             this.gameObject.GetComponent<Determine>().DetermineDie();  // 死んだ人を殺す 
-            this.gameObject.GetComponent<Determine>().DetermineGoal(); // ゴールした人をゴールさせる
             SceneManager.LoadScene("Judgment");
             Debug.Log("終わったよ");
         }
@@ -160,4 +173,15 @@ public class MoveScene : MonoBehaviour
         return textFlag;
     }
     //-----------------------------------------------------------
+    // ゴールのセキュリティ関数
+    public bool GetSecurity()
+    {
+        return goalSecurity;
+    }
+
+    //
+    public void enableSecurityText(bool flag)
+    {
+        securityText.enabled = flag;
+    }
 }

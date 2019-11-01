@@ -24,5 +24,10 @@ public class MapButtonClick : MonoBehaviour
         MapButtonData map = this.gameObject.GetComponent<MapButtonData>();
         mapObject.GetComponent<MapPlayerAction>().SetInfPlayerPos();
         mapObject.GetComponent<MapPlayerAction>().CheakPos(map.x, map.y,this.gameObject);
+        CheckGoal(mapObject.GetComponent<Map>().GetGoalX(), mapObject.GetComponent<Map>().GetGoalY());
+    }
+    public void CheckGoal(int goalx,int goaly)
+    {
+        this.gameObject.GetComponent<MapButtonData>().SetGoal(goalx, goaly);
     }
 }

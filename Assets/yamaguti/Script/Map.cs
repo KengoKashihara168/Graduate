@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    const int MAP_TILES = 25;
+    const int MAP_TILES = 16;
     const int MAX_PLAYER = 4;
     public Canvas canvas;
     Button[] map= new Button[MAP_TILES];
@@ -36,85 +36,10 @@ public class Map : MonoBehaviour
                 }               
             }
         }
-        //for(int i=0;i<3;i++)
-        //     CreatePlayerStartPos(1,3);
         goalX = 0;
         goalY = 0;
         //ResetColor();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    // プレイヤーの初期位置を決める関数
-    public void CreatePlayerStartPos(ref int x,ref int y)
-    {
-        // 位置をランダムに決める
-        int a = Random.Range(0, 24);
-        // すでに使われているか確認
-        for(int i=0;i<startCount;i++)
-        {
-            if (startPos[i] == map[a])
-            {
-                // 使われていたので決めなおし
-                a = Random.Range(0, 24);
-                continue;
-            }
-        }
-        // 使えたので初期位置を保存しておく
-        startPos[startCount] = map[a];
-        startCount += 1;
-
-       // Debug.Log("初期位置"+map[a]);
-
-        // 位置の色を変える
-        var colors = map[a].colors;
-
-        colors.normalColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-
-        colors.highlightedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.pressedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.disabledColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-
-        map[a].colors = colors;
-
-        MapButtonData data = map[a].GetComponent<MapButtonData>();
-        x = data.x;
-        y = data.y;
-    }
-
-    // ゴールの初期位置を決める
-    public void CreateGoal()
-    {
-        // ランダムに決める
-        int a = Random.Range(0, 24);
-        // プレイヤーがいないかどうか確認
-        for (int i = 0; i < startCount; i++)
-        {
-            if (PlayerController.Instance.GetPlayerPositionX(i) == map[a].GetComponent<MapButtonData>().x&& PlayerController.Instance.GetPlayerPositionY(i)==map[a].GetComponent<MapButtonData>().y)
-            {
-                // いたので決めなおし
-                a = Random.Range(0, 24);
-                continue;
-            }
-        }
-        //Debug.Log("ゴール" + map[a]);
-
-        // 位置の色を変える
-        var colors = map[a].colors;
-
-        colors.normalColor = new Color(255f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.highlightedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.pressedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.disabledColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-
-        map[a].colors = colors;
-
-        goalX = map[a].GetComponent<MapButtonData>().x;
-        goalY = map[a].GetComponent<MapButtonData>().y;
-    }
+    }  
 
     //  全ての色を戻す
     public void ResetColor()
@@ -123,11 +48,11 @@ public class Map : MonoBehaviour
         {
             var colors = map[i].colors;
 
-            colors.normalColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.highlightedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.pressedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.selectedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-            colors.disabledColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+            colors.normalColor = Color.white;
+            colors.highlightedColor = Color.white;
+            colors.pressedColor = Color.white;
+            colors.selectedColor = Color.white;
+            colors.disabledColor = Color.white;
 
             map[i].colors = colors;
         }
@@ -139,11 +64,11 @@ public class Map : MonoBehaviour
 
         var colors = chButton.colors;
 
-        colors.normalColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-        colors.highlightedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-        colors.pressedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-        colors.selectedColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
-        colors.disabledColor = new Color(255f / 255f, 255f / 255f, 255f / 255f, 255f / 255f);
+        colors.normalColor = Color.white;
+        colors.highlightedColor = Color.white;
+        colors.pressedColor = Color.white;
+        colors.selectedColor = Color.white;
+        colors.disabledColor = Color.white;
 
         chButton.colors = colors;
     }
@@ -158,11 +83,28 @@ public class Map : MonoBehaviour
 
         var colors = chButton.colors;
 
-        colors.normalColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.highlightedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.pressedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.selectedColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
-        colors.disabledColor = new Color(165f / 255f, 220f / 255f, 192f / 255f, 255f / 255f);
+        colors.normalColor = Color.green;
+        colors.highlightedColor = Color.green;
+        colors.pressedColor = Color.green;
+        colors.selectedColor = Color.green;
+        colors.disabledColor = Color.green;
+        chButton.colors = colors;
+    }
+    // 色指定可能な関数
+    public void PlayerPosColor(int x, int y,Color color)
+    {
+        Button chButton = SearchButton(x, y);
+        if (x == -1 && y == -1)
+        {
+            chButton = SearchButton(0, 0);
+        }
+
+        var colors = chButton.colors;
+        colors.normalColor = color;
+        colors.highlightedColor = color;
+        colors.pressedColor = color;
+        colors.selectedColor = color;
+        colors.disabledColor = color;
 
         Debug.Log(chButton.name);
 
@@ -177,7 +119,7 @@ public class Map : MonoBehaviour
             foreach (Transform child in canvas.transform)
             {
                 // 子の要素をたどる
-                if (child.name == "Map" + (x + (y * 5 + 1)))
+                if (child.name == "Map" + (x + (y * 4 + 1))) // この値を直すとマス目を変えられる
                 {
                     // 指定した名前と一致
                     // Buttonコンポーネントを取得する
@@ -191,6 +133,7 @@ public class Map : MonoBehaviour
         
     }
 
+    // ゴールゲッター
     public int GetGoalX()
     {
         return goalX;
@@ -199,15 +142,19 @@ public class Map : MonoBehaviour
     {
         return goalY;
     }
+
+    // ゴールセッター
     public void SetGoal(int x,int y)
     {
         goalX = x;
         goalY = y;
     }
+    // ゴールが存在するかのフラグ
     public bool GoalFlag()
     {
         return nullGoal;
     }
+    // ゴールが存在するかのフラグのチェンジ用
     public void ChengGoalFlag(bool flag)
     {
         nullGoal = flag;

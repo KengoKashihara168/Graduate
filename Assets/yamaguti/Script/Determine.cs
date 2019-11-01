@@ -64,30 +64,12 @@ public class Determine : MonoBehaviour
         }
     }
     // ゴール確認関数
-    public void DetermineGoal()
+    public void DetermineGoal(int player)
     {
-        for (int i = 0; i < 4; i++)
-        {
-            // 人かどうか確認
-            if (PlayerController.Instance.IsHuman(i))
-            {
-                // 生きているか確認
-                if (PlayerController.Instance.IsLive(i))
-                {
-                    // ゴールしているか確認
-                    if (!PlayerController.Instance.IsGoal(i))
-                    {
-                        // 場所が一致しているか確認
-                        if (MatchCheck(map.GetComponent<Map>().GetGoalX(), map.GetComponent<Map>().GetGoalY(), PlayerController.Instance.GetPlayerPositionX(i), PlayerController.Instance.GetPlayerPositionY(i)))
-                        {
-                            Debug.Log("プレイヤー" + i + "ゴールしました");
-                            PlayerController.Instance.Goal(i);
-                        }
-                    }
-                }
 
-            }
-        }
+        Debug.Log("プレイヤー" + player + "ゴールしました");
+        PlayerController.Instance.Goal(player);
+
     }
     // マップの位置がかぶっているかの確認関数
     public bool MatchCheck(int x1, int y1, int x2, int y2)
@@ -119,8 +101,12 @@ public class Determine : MonoBehaviour
             x = PlayerController.Instance.GetPlayerPositionX(i) - PlayerController.Instance.GetPlayerPositionX(Wolf);
             y = PlayerController.Instance.GetPlayerPositionY(i) - PlayerController.Instance.GetPlayerPositionY(Wolf);
 
-            //マップの差分が１ならtrueを返す
-            if ((x <= 1 && x >= -1 && y == 0) || (y <= 1 && y >= -1 && x == 0))
+
+            //マップの差分が１以下ならtrueを返す
+            if ((x <= 1 && y >= 0 && x >= -1) || (y <= 1 && x >= 0 && y >= -1))
+            {
+                return true;
+            }
             {
                 Debug.Log("プレイヤー"+i);
                 return true;
@@ -129,6 +115,56 @@ public class Determine : MonoBehaviour
         }
 
         return false;
+    }
+
+    // 移動先がゴール
+    public bool MoveToGoal(int player)
+    {
+        if (PlayerController.Instance.IsHuman(player))
+        {
+            if(MatchCheck(GoalController.Instance.GetPosX((int)GoalId.GOAL), GoalController.Instance.GetPosY((int)GoalId.GOAL), PlayerController.Instance.GetPlayerPositionX(player), PlayerController.Instance.GetPlayerPositionY(player)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    // 移動先が鍵
+    public bool MoveToKey(int player,ref int key)
+    {
+        for(int i=0;i<(int)GoalId.GOAL;i++)
+        {
+            if(GoalController.Instance.GetKeyFlag(i))
+            {
+                if (PlayerController.Instance.IsHuman(player))
+                {
+                    if (MatchCheck(GoalController.Instance.GetPosX(i), GoalController.Instance.GetPosY(i), PlayerController.Instance.GetPlayerPositionX(player), PlayerController.Instance.GetPlayerPositionY(player)))
+                    {
+                        string name = "GoalBut" + (i + 1);
+                        Debug.Log(name);
+                        
+                         key = i;
+                         return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+    // 鍵が開くか確認
+    public bool OpenCheck()
+    {
+        for(int i=0;i<(int)GoalId.GOAL;i++)
+        {
+            if (GoalController.Instance.GetKeyFlag(i))
+            {
+                Debug.Log("開かない");
+                return false;
+            }
+              
+        }
+        return true;
     }
 
 }

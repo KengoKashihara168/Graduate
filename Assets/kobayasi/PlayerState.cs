@@ -6,17 +6,18 @@ using UnityEngine.SceneManagement;
 public class PlayerState : MonoBehaviour
 {
     [SerializeField]
-    private Text[] player=new Text [4];
+    private Text[] player = new Text[4];
 
     // プレイヤーの参加人数
     [SerializeField]
     private int playerNum = 4;
 
     //プレイヤーの今の状態を知るための変数
-    string[] nowState = new string [4];
+    string[] nowState = new string[4];
 
     //プレイヤーが退場(ゴールor死亡)した数
-    private int playerExit;
+    private int playerDeth;
+    private int playerGoal;
 
     //プレイヤーの取得
     [SerializeField]
@@ -30,11 +31,18 @@ public class PlayerState : MonoBehaviour
         {
             nowState[i] = "生存";
 
-            //死んだかゴールしたか
-            if (PlayerController.Instance.IsGoal(i) || !PlayerController.Instance.IsLive(i))
+            //プレイヤーがゴールしたか
+            if (PlayerController.Instance.IsGoal(i))
             {
-                //退場の値を増やす          
-                playerExit++;
+                //ゴールカウントを増やす          
+                playerGoal++;
+            }
+
+            //プレイヤーが死亡したか
+            if (!PlayerController.Instance.IsLive(i))
+            {
+                //死亡カウントを増やす
+                playerDeth++;
             }
         }
     }
@@ -51,6 +59,7 @@ public class PlayerState : MonoBehaviour
             {
                 //ゴールと表示
                 nowState[i] = "ゴール";
+                player[i].color = new Color(255.0f, 255.0f, 0.0f);
             }
             //ゴールしていないなら
             else
@@ -60,11 +69,13 @@ public class PlayerState : MonoBehaviour
                 {
                     //生存と表示
                     nowState[i] = "生存";
+                    player[i].color = new Color(0.0f, 255.0f, 50.0f);
                 }
                 else
                 {
                     //死亡と表示
                     nowState[i] = "死亡";
+                    player[i].color = new Color(20.0f, 0.0f, 0.0f);
                 }
             }
 
@@ -76,27 +87,34 @@ public class PlayerState : MonoBehaviour
                     nowState[1] = "死亡";
                 }
             }
-            
+
             //画面にプレイヤーと今の状態を表示する
             player[i].GetComponent<Text>().text = "Player" + (i + 1).ToString() + " " + nowState[i].ToString();
 
 
         }
     }
+    //ボタンでのシーン切り替え
     public void OnClick()
     {
-   
-            //死んだ数とゴールした数が3なら
-            if (playerExit >= 3)
-            {
-                //終了
-                Debug.Log("終了");
-                SceneManager.LoadScene("Result");
-            }
-            else
-            {
-                SceneManager.LoadScene("CountDown");
-            }
-        
+        //死んだ数かゴールした数が2なら
+        if (playerDeth >= 2 || playerGoal >= 2)
+        {
+            //終了
+            Debug.Log("終了");
+            SceneManager.LoadScene("Result");
+        }
+        //死亡数とゴールした数が１なら
+        else if(playerDeth == 1 && playerGoal == 1)
+        {
+            //移動シーズン
+            SceneManager.LoadScene("MoveScene");
+        }
+        else
+        {
+            //話し合いシーンへ
+            SceneManager.LoadScene("CountDown");
+        }
+
     }
 }

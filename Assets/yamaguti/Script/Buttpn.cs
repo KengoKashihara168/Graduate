@@ -1,10 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Buttpn : MonoBehaviour
 {
     public GameObject map;
+    [SerializeField]
+    public GameObject key;
+    [SerializeField]
+    public GameObject UI;
+    int keynum = 0;
+    bool keypanel=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +29,7 @@ public class Buttpn : MonoBehaviour
         // マップが押されていない状態の時のみ通る
         if(!map.GetComponent<MoveScene>().GetButtonFlag())
         {
-            // ゴールが設定されているかどうかの確認
-            if (!map.GetComponent<Map>().GoalFlag())
-            {
-                // ゴールを設定
-                map.GetComponent<Map>().SetGoal(SelectJobChangeCharacter.GetPosX(), SelectJobChangeCharacter.GetPosY());
-                // ゴールを設定したのでフラグをtrueに
-                map.GetComponent<Map>().ChengGoalFlag(true);
-            }
-            Debug.Log("ごーるだよ" + "Xのほう" + map.GetComponent<Map>().GetGoalX()+ "Yのほう" + map.GetComponent<Map>().GetGoalY());
+
             // テキストを表示するフラグをtrueに
             map.GetComponent<MoveScene>().ChengOnTextFlag();
             // マップの色を全てリセット
@@ -42,6 +41,15 @@ public class Buttpn : MonoBehaviour
             // 移動が完了していない状態にフラグを変えておく
             map.GetComponent<MoveScene>().ChengMoveFlag(false);
             map.GetComponent<MapPlayerAction>().SetButtonFlag(true);
+            if (!PlayerController.Instance.IsHuman(map.GetComponent<MoveScene>().GetTotal()))
+            {
+                if (map.GetComponent<MoveScene>().GetSecurity())
+                {
+                    map.GetComponent<MoveScene>().enableSecurityText(true);
+                    // プレイヤーの現在地の色を変える
+                    map.GetComponent<Map>().PlayerPosColor(GoalController.Instance.GetPosX((int)GoalId.GOAL), GoalController.Instance.GetPosY((int)GoalId.GOAL), Color.yellow);
+                }
+            }
         }
     }
     // 移動が完了したときに押すボタンの関数
@@ -71,6 +79,24 @@ public class Buttpn : MonoBehaviour
 
             // 移動が完了したのでtrueにする
             map.GetComponent<MoveScene>().ChengMoveFlag(true);
+            if(PlayerController.Instance.IsHuman(map.GetComponent<MoveScene>().GetTotal()))
+            {
+                if (map.GetComponent<Determine>().MoveToKey(map.GetComponent<MoveScene>().GetTotal(), ref keynum))
+                {
+                    key.SetActive(true);
+                    keypanel = true;
+                    key.GetComponent<Image>().sprite = Resources.Load<Sprite>("Images/Animal" + keynum);
+                    Debug.Log("鍵");
+                }
+                // UI解放
+                if (map.GetComponent<Determine>().MoveToGoal(map.GetComponent<MoveScene>().GetTotal()))
+                {
+                    map.GetComponent<GoalUI>().SetAlive(true);
+                }
+            }
+            
+            
+
             Debug.Log("OK");
         }
        
@@ -91,6 +117,8 @@ public class Buttpn : MonoBehaviour
             map.GetComponent<MoveScene>().NextPlayer();
             // 押されていない状態に戻す
             map.GetComponent<MoveScene>().ChengButtonFlag(false);
+            key.SetActive(false);
+            map.GetComponent<MoveScene>().enableSecurityText(false);
         }
     }
 }

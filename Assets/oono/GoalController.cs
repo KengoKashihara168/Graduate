@@ -53,7 +53,7 @@ public class GoalController : MonoBehaviour
     //使用するキーはtrue
     public void SetKeyFlag(int num, bool flag)
     {
-        goals[num].goalFlag = flag;
+        goals[num].keyFlag = flag;
     }
     //ゴールフラグの取得
     public bool GetGoalFlag()

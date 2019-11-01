@@ -195,7 +195,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
             //jobDecision = true;
             //ゴールを決める
             SetitngGoal();
-
+            SetingKey();
 
             Debug.Log("aaaxxx");
         }
@@ -250,7 +250,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
         int x1 = Random.Range(0, MAX_SIZE_X);
         int y1 = Random.Range(0, MAX_SIZE_Y);
-        int num = Random.Range(0, 4);
+        int num = Random.Range(0, 5);
         int save = -1;
         for (int j = 0; j < 2; j++)
         {
@@ -270,7 +270,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
             if (save == num)
             {
-                num = Random.Range(0, 4);
+                num = Random.Range(0, 5);
                 j -= 1;
                 continue;
             }
