@@ -10,13 +10,14 @@ public class ResultText : MonoBehaviour
       [SerializeField] private Text survival;
 
     //人数
-    int count;
-
+    private int count;
+    [SerializeField] private int gool;
+    [SerializeField] private Text[]player=new Text[(int)PlayerNum.MaxPlayer];
     // Start is called before the first frame update
     void Start()
     {
         count = 0;
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < (int)PlayerNum.MaxPlayer; i++)
         {
 
             //ゴールしている人なら
@@ -40,7 +41,19 @@ public class ResultText : MonoBehaviour
             survival.text = " 狼の勝ち";
             survival.color = new Color(0.0f, 0.0f, 0.0f);
         }
-       
+
+        for (int i = 0; i < (int)PlayerNum.MaxPlayer; i++)
+        {
+            if (PlayerController.Instance.IsHuman(i))
+            {
+                player[i].text ="村人";
+            }
+            else
+            {
+                player[i].text = "狼";
+            }
+        }
+
     }
     // Update is called once per frame
     void Update()

@@ -19,6 +19,5 @@ public class TItle : MonoBehaviour
     {
         GoalController.Instance.ResetGoal();
         SceneManager.LoadScene("job");
-
     }
 }
