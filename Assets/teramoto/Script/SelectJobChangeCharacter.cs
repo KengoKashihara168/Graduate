@@ -204,7 +204,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
         if(IsGoalDecision)
         {
             DistancePlayerToGoal();
-            PlayerChangeButton.GetComponentInChildren<Text>().text = "ゴールから一番近いのは";
+            PlayerChangeButton.GetComponentInChildren<Text>().text = "次へ";
         }
 
 
@@ -474,8 +474,8 @@ public class SelectJobChangeCharacter : MonoBehaviour
 
         //プレイヤーに情報代入
         PlayerController.Instance.SetPosition(pushcount - 1, posListX[posListX.Count - 1], posListY[posListY.Count - 1]);
-        a.text = "プレイヤーの初期位置は" +((x1 + (y1 * 4)) + 1);
-        print("Player"+( pushcount)+ "の場所は" + ((x1 + (y1 * 4)) + 1));
+        a.text = "プレイヤーの初期位置は" +((x1 + (y1 * 4)) + 1) + "です";
+        print("Player"+( pushcount)+ "の場所は" + ((x1 + (y1 * 4)) + 1)+"です");
 
     }
 
@@ -579,7 +579,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
                 if (distance >= (posA - posB).magnitude)
                 {
                     distance = (posA - posB).magnitude;
-                    name = "プレイヤー" + (i + 1);
+                    name = "ゴールから一番近いプレイヤーはプレイヤー" + (i + 1)+"です";
 
                 }
 
