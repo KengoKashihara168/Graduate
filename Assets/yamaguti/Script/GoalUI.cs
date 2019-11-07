@@ -8,13 +8,22 @@ public class GoalUI : MonoBehaviour
     [SerializeField]
     public GameObject UI;
     [SerializeField]
+    public GameObject CheckGoalUI;
+    [SerializeField]
     public Button[] allButton;
     bool UIAlive;
+    bool checkUIAlive;
     // Start is called before the first frame update
     void Start()
     {
         UIAlive = false;
+        checkUIAlive = false;
         foreach (Transform child in UI.transform)
+        {
+            //child is your child transform
+            child.gameObject.SetActive(false);
+        }
+        foreach (Transform child in CheckGoalUI.transform)
         {
             //child is your child transform
             child.gameObject.SetActive(false);
@@ -24,8 +33,30 @@ public class GoalUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(UIAlive)
+
+    }
+    public void SetAlive(bool alive)
+    {
+        UIAlive = alive;
+    }
+    public bool IsAlive()
+    {
+        return UIAlive;
+    }
+
+    public void SetCAlive(bool alive)
+    {
+        checkUIAlive = alive;
+    }
+    public bool IsCAlive()
+    {
+        return checkUIAlive;
+    }
+    public void ChengeGoalUI()
+    {
+        if (UIAlive)
         {
+            Debug.Log("adsfa");
             foreach (Transform child in UI.transform)
             {
                 //child is your child transform
@@ -41,12 +72,23 @@ public class GoalUI : MonoBehaviour
             }
         }
     }
-    public void SetAlive(bool alive)
+    public void ChengeCheckGoalUI()
     {
-        UIAlive = alive;
-    }
-    public bool IsAlive()
-    {
-        return UIAlive;
+        if (checkUIAlive)
+        {
+            foreach (Transform child in CheckGoalUI.transform)
+            {
+                //child is your child transform
+                child.gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            foreach (Transform child in CheckGoalUI.transform)
+            {
+                //child is your child transform
+                child.gameObject.SetActive(false);
+            }
+        }
     }
 }

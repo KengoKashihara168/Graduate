@@ -18,6 +18,7 @@ public class GoalUIButton : MonoBehaviour
     int keyNumOne;
     int keyNumTw;
     GameObject Unlock1, Unlock2;
+    GoalUI goalUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class GoalUIButton : MonoBehaviour
         Unlock2 = GameObject.Find("UnLock2");
         GoalUnlockUIImage1 = Unlock1.GetComponent<Image>();
         GoalUnlockUIImage2 = Unlock2.GetComponent<Image>();
+        //goalUI = map.GetComponent<GoalUI>();
     }
     // 
     public void UnLockClick()
@@ -34,6 +36,7 @@ public class GoalUIButton : MonoBehaviour
         if(Unlock1.GetComponent<GoalUnLockUIData>().IsInfFlag()&& Unlock2.GetComponent<GoalUnLockUIData>().IsInfFlag())
         {
             map.GetComponent<GoalUI>().SetAlive(false);
+            map.GetComponent<GoalUI>().ChengeGoalUI();
             if (map.GetComponent<Determine>().OpenCheck())
             {
                 Debug.Log("ゴールした");
@@ -52,7 +55,6 @@ public class GoalUIButton : MonoBehaviour
     {
         if (!this.gameObject.GetComponent<GoalUIData>().IsPress())
         {
-            Debug.Log("押した");
             this.gameObject.GetComponent<GoalUIData>().setpress(true);
             Debug.Log(int.Parse(this.gameObject.name.Substring(7)) - 1);
             if (GoalController.Instance.GetKeyFlag(int.Parse(this.gameObject.name.Substring(7))-1))
@@ -62,12 +64,10 @@ public class GoalUIButton : MonoBehaviour
                 if (keyNumOne == (int)GoalId.ID_NUM)
                 {
                     keyNumOne = int.Parse(this.gameObject.name.Substring(7)) - 1;
-                    Debug.Log("aasda"+keyNumOne);
                 }
                 else if (keyNumTw == (int)GoalId.ID_NUM)
                 {
                     keyNumTw = int.Parse(this.gameObject.name.Substring(7)) - 1;
-                    Debug.Log("aasda222" + keyNumTw);
                 }
                   
             }
@@ -92,6 +92,7 @@ public class GoalUIButton : MonoBehaviour
     public void NotClick()
     {
         map.GetComponent<GoalUI>().SetAlive(false);
+        map.GetComponent<GoalUI>().ChengeGoalUI();
         ResetImage();
         ResetFlag();
     }

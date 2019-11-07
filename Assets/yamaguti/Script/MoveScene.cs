@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class MoveScene : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject[] buttonObj;
     int playerTotal; // 今のプレイヤーの番号を置いておく変数
     public Text pName;  // プレイヤー名を表示するためのテキスト変数
     public Text text;   // 役職を表示するためのテキスト変数
@@ -17,6 +19,11 @@ public class MoveScene : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        for(int i=0;i< buttonObj.Length;i++)
+        {
+            buttonObj[i].SetActive(false);
+        }
+        buttonObj[0].SetActive(true);
         securityText.enabled = false;
         if (GoalController.Instance.GetGoalFlag())
         {

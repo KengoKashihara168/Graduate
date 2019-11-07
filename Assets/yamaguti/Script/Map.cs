@@ -111,6 +111,74 @@ public class Map : MonoBehaviour
         chButton.colors = colors;
     }
 
+    // 色指定可能な関数
+    public void PlayerPosMoveColor(int x, int y, Color color)
+    {
+        int pulusX = x + 1;
+        int pulusY = y + 1;
+        int minusX = x - 1;
+        int minusY = y - 1;
+        Button chButton = SearchButton(x, y);
+        for (int i=0;i<4;i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    chButton = SearchButton(pulusX, y);
+                    if (pulusX > 3)
+                        continue;
+                    break;
+                case 1:
+                    chButton = SearchButton(x, pulusY);
+                    if (pulusY > 3)
+                        continue;
+                    break;
+                case 2:
+                    chButton = SearchButton(minusX, y);
+                    if(minusX<0)
+                        continue;
+                    break;
+                case 3:
+                    chButton = SearchButton(x, minusY);
+                    if (minusY < 0)
+                        continue;
+                    break;
+            }
+            var colors = chButton.colors;
+            colors.normalColor = color;
+            colors.highlightedColor = color;
+            colors.pressedColor = color;
+            colors.selectedColor = color;
+            colors.disabledColor = color;
+
+            chButton.colors = colors;
+        }
+       
+    }
+    public void WolfPosMoveColor(int x, int y, Color color)
+    {
+        Button chButton = SearchButton(x, y);
+        for (int j = 0; j < 4; j++)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == x && j == y)
+                {
+                    continue;
+                }
+                chButton = SearchButton(i, j);
+                var colors = chButton.colors;
+                colors.normalColor = color;
+                colors.highlightedColor = color;
+                colors.pressedColor = color;
+                colors.selectedColor = color;
+                colors.disabledColor = color;
+                chButton.colors = colors;
+            }
+        }
+
+    }
+
     // 座標をボタンに直す関数
     public Button SearchButton(int x,int y)
     {

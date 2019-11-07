@@ -35,7 +35,7 @@ public class GoalUIData : MonoBehaviour
         this.gameObject.GetComponentInChildren<Text>().text = id.ToString();
         Debug.Log("画像の名前"+ ("Images/Animal" + i));
        
-        this.gameObject.GetComponent<Button>().image.sprite = Resources.Load<Sprite>("Images/Animal" + i) ;
+        this.gameObject.GetComponent<Button>().image.sprite = Resources.Load<Sprite>("Images/Animal" + i);
         image = this.gameObject.GetComponent<Button>().image;
         MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         var colors = this.gameObject.GetComponent<Button>().colors;

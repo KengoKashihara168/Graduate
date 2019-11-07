@@ -125,10 +125,10 @@ public class MapPlayerAction : MonoBehaviour
 
         var colors = button.colors;
 
-        colors.normalColor = Color.white;
-        colors.highlightedColor = Color.white;
-        colors.pressedColor = Color.white;
-        colors.disabledColor = Color.white;
+        colors.normalColor = Color.yellow;
+        colors.highlightedColor = Color.yellow;
+        colors.pressedColor = Color.yellow;
+        colors.disabledColor = Color.yellow;
 
         button.colors = colors;
 
