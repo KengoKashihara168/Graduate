@@ -1022,13 +1022,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   survival: {fileID: 1569545979}
-  gool: 0
+  goal: 0
   player:
   - {fileID: 341723131}
   - {fileID: 1171944313}
   - {fileID: 337968297}
   - {fileID: 2026537633}
-  goolPos: {fileID: 587357690}
+  goalPos: {fileID: 587357690}
 --- !u!4 &1605852015
 Transform:
   m_ObjectHideFlags: 0

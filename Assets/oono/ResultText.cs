@@ -56,7 +56,7 @@ public class ResultText : MonoBehaviour
             }
         }
         goal = (GoalController.Instance.GetPosX((int)GoalId.GOAL) + ((GoalController.Instance.GetPosY((int)GoalId.GOAL) * 4)) + 1);
-        goalPos.text = "ゴールの場所は"+goal.ToString();
+        goalPos.text = "ゴールの場所は"+goal;
     }
     // Update is called once per frame
     void Update()
