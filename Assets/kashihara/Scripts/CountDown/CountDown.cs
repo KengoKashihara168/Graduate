@@ -9,14 +9,15 @@ public class CountDown : MonoBehaviour
     [SerializeField] private float time;    // タイム
     private Text timeText;                  // テキスト
     private float frameTime;                // 1フレームの経過時間
-
+    private bool push;
     // Start is called before the first frame update
     void Start()
     {
         timeText = GetComponent<Text>();                            // テキストの取得
-        Debug.Assert(time <= 10, "設定時間が10分を超えています。"); // 設定時間の警告
+       // Debug.Assert(time <= 10, "設定時間が10分を超えています。"); // 設定時間の警告
         time *= 60.0f;                                              // 入力値を秒数に修正
         frameTime = Time.deltaTime;
+        push = false;
     }
 
     // Update is called once per frame
@@ -32,10 +33,12 @@ public class CountDown : MonoBehaviour
 
         // 文字列に変換
         string text = minute.ToString() + ":" + tenSecond.ToString() + oneSecond.ToString();
-        timeText.text = text;
+     //   timeText.text = text;
 
+        //カウント消すので一時的なコメント処理
         // タイムアップ
-        if(time <= 0.0f)
+        //if (time <= 0.0f)
+        if(push==true) 
         {
             EndCount();
             SceneManager.LoadScene("MoveScene");
@@ -47,7 +50,9 @@ public class CountDown : MonoBehaviour
     /// </summary>
     public void EndCount()
     {
-        frameTime = 0.0f;
+        //カウント消すので一時的なコメント処理
+        //frameTime = 0.0f;
+        push = true;
         Debug.Log("終了");
         SceneManager.LoadScene("MoveScene");
     }

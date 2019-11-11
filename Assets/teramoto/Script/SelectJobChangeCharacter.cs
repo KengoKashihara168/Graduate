@@ -101,6 +101,8 @@ public class SelectJobChangeCharacter : MonoBehaviour
     bool IsMoveScene;
     string name;
 
+    public AudioClip sound1;
+    AudioSource audioSource;
 
     // Start is called before the first frame update
 
@@ -141,6 +143,7 @@ public class SelectJobChangeCharacter : MonoBehaviour
         //ゴールの場所が決まったとき用
         IsGoalDecision = false;
 
+        audioSource = GetComponent<AudioSource>();
     }
 
 //--------------------------------------------------
@@ -169,17 +172,20 @@ public class SelectJobChangeCharacter : MonoBehaviour
         //Jobボタン
         if (pushcount < MAXPLAYER + 1 && IsJobButtonTouch == true)
         {
+            audioSource.PlayOneShot(sound1);
             //役職決定用ボタン
             PushJobButton();
         }
         //Spaceがおされ4回以内なら
         if (IsCharctorButtonTouch && pushcount < MAXPLAYER)
         {
+            audioSource.PlayOneShot(sound1);
             //役職決定用決定用ボタン
             PushCharctorButton();
         }
         if (IsPostionButtomTouch && pushcount < MAXPLAYER + 1)
-        { 
+        {
+            audioSource.PlayOneShot(sound1);
             PushPositionButton();
         }
 

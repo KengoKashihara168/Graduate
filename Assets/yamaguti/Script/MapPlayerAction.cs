@@ -78,13 +78,13 @@ public class MapPlayerAction : MonoBehaviour
         }
         else if (!PlayerController.Instance.IsHuman(playerName))
         {
-            // 人狼の場合
-            if (infX == x && infY == y)
-            {
-                Debug.Log("さっきいったよ");
-                return;
-            }
-            else
+            //// 人狼の場合
+            //if (infX == x && infY == y)
+            //{
+            //    Debug.Log("さっきいったよ");
+            //    return;
+            //}
+            //else
             {
                 // 前に選択したボタンの色を戻す
                 if (oldObject != null)

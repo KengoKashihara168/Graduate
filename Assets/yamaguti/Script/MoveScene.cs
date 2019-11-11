@@ -58,11 +58,11 @@ public class MoveScene : MonoBehaviour
            
             if (PlayerController.Instance.IsHuman(playerTotal))
             {
-                text.text = "村人です";
+                text.text = "姫です";
             }
             else
             {
-                text.text = "人狼です";
+                text.text = "吸血鬼です";
             }
 
         }

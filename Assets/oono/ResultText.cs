@@ -33,14 +33,14 @@ public class ResultText : MonoBehaviour
         //ゴールしている人数の確認
         if (count >= 2)
         {
-            survival.text = " 村人の勝ち";
+            survival.text = " 姫の勝ち";
             //黒にカラー変更
             survival.color = new Color(255.0f, 255.0f, 255.0f);
         }
         else
         {
             //白にカラー変更
-            survival.text = " 狼の勝ち";
+            survival.text = " 吸血鬼の勝ち";
             survival.color = new Color(0.0f, 0.0f, 0.0f);
         }
 
@@ -48,15 +48,15 @@ public class ResultText : MonoBehaviour
         {
             if (PlayerController.Instance.IsHuman(i))
             {
-                player[i].text = "プレイヤー" + (i + 1) + "村人";
+                player[i].text = "プレイヤー" + (i + 1) + "姫";
             }
             else
             {
-                player[i].text = "プレイヤー" + (i + 1) + "狼";
+                player[i].text = "プレイヤー" + (i + 1) + "吸血鬼";
             }
         }
         goal = (GoalController.Instance.GetPosX((int)GoalId.GOAL) + ((GoalController.Instance.GetPosY((int)GoalId.GOAL) * 4)) + 1);
-        goalPos.text = "ゴールの場所は"+goal;
+        goalPos.text = "ゴールの場所は"+goal+"です";
     }
     // Update is called once per frame
     void Update()
