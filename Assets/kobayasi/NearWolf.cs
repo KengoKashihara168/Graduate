@@ -16,7 +16,7 @@ public class NearWolf : MonoBehaviour
         if (Determine.WolfCheck())
         {
             //その情報を表示する
-            nearWolf.text = "プレイヤーの近くに人狼がいます";
+            nearWolf.text = "プレイヤーの近くに吸血鬼がいます";
             nearWolf.enabled = true;
         }
         else
