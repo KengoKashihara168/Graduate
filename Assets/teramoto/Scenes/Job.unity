@@ -710,7 +710,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9ed289dd9d828ca4b8e11afb2b3ae7a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f8d976b352bec3c4986c07c870a5c4fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -841,7 +841,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.8349056, g: 0.899109, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.2968995, g: 0.28773582, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -957,7 +957,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 1bc76a7cb4d67094fb7117494fb41215, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 36e6169dd3425e746911236741711daf, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1559,7 +1559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e9ecacde1c4df04eb971a0890a29c47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 64557bb2f20d75e4d9ade56ce8a669ba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

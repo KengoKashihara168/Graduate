@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/yamaguti/Scenes/MoveScene.unity
     guid: dbdf1fd31c72b4847a6b0fb44db40d75
   - enabled: 1
-    path: Assets/kobayasi/Judgment.unity
+    path: Assets/kobayashi/Scene/Judgment.unity
     guid: 6c85e00d920939040a769ac59f65cc38
   - enabled: 1
     path: Assets/oono/Result.unity
